@@ -1,0 +1,34 @@
+﻿<Project>
+
+	<PropertyGroup>
+		<SetupProjectDependsOn>
+			SetupNuGet
+		</SetupProjectDependsOn>
+	</PropertyGroup>
+
+	<Target Name="SetupProject" DependsOnTargets="$(SetupProjectDependsOn)">
+		<Message Text="Project Setup Finished" Importance="high" />
+	</Target>
+
+	<PropertyGroup>
+		<SetupNuGetDependsOn>
+			CopyNuGetFile;
+			SetNuGetLocalFeedPath;
+		</SetupNuGetDependsOn>
+	</PropertyGroup>
+
+	<Target Name="SetupNuGet" DependsOnTargets="$(SetupNuGetDependsOn)">
+		<Message Text="NuGet Setup Finished" Importance="high" />
+	</Target>
+
+	<Target Name="CopyNuGetFile">
+		<Copy SourceFiles="$(NuGetTemplatePath)" DestinationFiles="$(SolutionDir)NuGet.config" />
+	</Target>
+
+	<Target Name="SetNuGetLocalFeedPath">
+		<XmlPoke XmlInputPath="$(SolutionDir)NuGet.Config"
+				 Query="//add[@key='Local Feed']/@value"
+				 Value="D:\\Repos\\Packages\\$(Branch)" />
+	</Target>
+
+</Project>

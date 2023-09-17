@@ -1,0 +1,8 @@
+﻿<Project>
+	<PropertyGroup>
+		<Branch>$([System.IO.File]::ReadAlltext('$(SolutionDir)..\.git\HEAD').Replace('ref: refs/heads/', '').Trim())</Branch>
+		<RepositoryPath>$(SolutionDir)..\</RepositoryPath>
+		<DevHubPath>$(SolutionDir)..\externals\DevHub</DevHubPath>
+		<NuGetTemplatePath>$(DevHubPath)\NuGet\NuGet.Template.config</NuGetTemplatePath>
+	</PropertyGroup>
+</Project>
